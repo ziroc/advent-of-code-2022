@@ -27,7 +27,6 @@ func main() {
 
 	sensors = map[Point]int{}
 
-	fmt.Println("done init")
 	rexp = regexp.MustCompile(`Sensor at x=(?P<sx>[\d-]+), y=(?P<sy>[\d-]+): closest beacon is at x=(?P<count>[\d-]+), y=(?P<count>[\d-]+)`)
 
 	linecount := 0
@@ -35,7 +34,6 @@ func main() {
 		linecount++
 		readInput(fileScanner.Text())
 	}
-	fmt.Println("done read input, ", len(sensors))
 	doWork()
 }
 
@@ -51,7 +49,7 @@ func doWork() bool {
 				}
 			}
 			if !inside {
-				fmt.Println(x, " ", y, " : ", x*tun+y)
+				fmt.Println("found: ", x, ", ", y, " : ", x*tun+y)
 				return true
 			}
 		}
