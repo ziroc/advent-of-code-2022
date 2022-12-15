@@ -1,11 +1,11 @@
 package main
 
 import (
+	u "advent22/utils"
 	"bufio"
 	"fmt"
-	"os"
 	. "image"
-	"strconv"
+	"os"
 	"strings"
 	"time"
 )
@@ -13,6 +13,7 @@ import (
 var pmap [][]int
 
 const MX = 700
+
 var start = Point{500, 0}
 
 func main() {
@@ -20,14 +21,14 @@ func main() {
 	fmt.Println("The time is", time.Now())
 
 	file, err := os.Open("inputs/day14.txt")
-	check(err)
+	u.Check(err)
 	defer file.Close()
 
 	fileScanner := bufio.NewScanner(file)
 	fileScanner.Split(bufio.ScanLines)
 	pmap = make([][]int, 164)
 
-	for i:= range pmap {
+	for i := range pmap {
 		row := make([]int, MX)
 		pmap[i] = row
 	}
@@ -106,7 +107,7 @@ func readInput(line string) {
 	var prevP Point
 	for i := range points {
 		xy := strings.Split(points[i], ",")
-		p := Point{toint(xy[0]), toint(xy[1])}
+		p := Point{u.Toint(xy[0]), u.Toint(xy[1])}
 		if i == 0 {
 			prevP = p
 			continue
@@ -118,16 +119,16 @@ func readInput(line string) {
 
 func makeSolid(from, to Point) {
 	if from.X == to.X {
-		m := min(from.Y, to.Y)
-		for i := 0; i <= abs(from.Y-to.Y); i++ {
+		m := u.Min(from.Y, to.Y)
+		for i := 0; i <= u.Abs(from.Y-to.Y); i++ {
 			row := pmap[m+i]
 			row[from.X] = 1
 		}
 	}
 	if from.Y == to.Y {
-		m := min(from.X, to.X)
-		for i := 0; i <= abs(from.X-to.X); i++ {
-			row := pmap[from.Y]			
+		m := u.Min(from.X, to.X)
+		for i := 0; i <= u.Abs(from.X-to.X); i++ {
+			row := pmap[from.Y]
 			row[m+i] = 1
 		}
 	}
@@ -145,32 +146,5 @@ func drawScreen() {
 		for x := 500 - 162; x < 644; x++ {
 			fmt.Print(pmap[y][x])
 		}
-	}
-}
-
-func min(a, b int) int {
-	if a <= b {
-		return a
-	}
-	return b
-}
-
-func toint(s string) int {
-	value, err := strconv.Atoi(s)
-	check(err)
-	return value
-}
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func abs(i int) int {
-	if i < 0 {
-		return -i
-	} else {
-		return i
 	}
 }
