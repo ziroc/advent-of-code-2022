@@ -29,9 +29,7 @@ func main() {
 
 	rexp = regexp.MustCompile(`Sensor at x=(?P<sx>[\d-]+), y=(?P<sy>[\d-]+): closest beacon is at x=(?P<count>[\d-]+), y=(?P<count>[\d-]+)`)
 
-	linecount := 0
 	for fileScanner.Scan() {
-		linecount++
 		readInput(fileScanner.Text())
 	}
 	doWork()
