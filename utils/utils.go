@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	i "image"
 	"strconv"
 	"time"
 )
@@ -69,3 +70,9 @@ func TimeTrack(start time.Time, name string) {
 	elapsed := time.Since(start)
 	fmt.Printf("%s took %s\n", name, elapsed)
 }
+
+var dirs8 map[string]i.Point = map[string]i.Point{"n": {0, -1}, "ne": {1, -1}, "e": {1, 0},
+	"se": {1, 1}, "s": {0, 1}, "sw": {-1, 1}, "w": {-1, 0}, "nw": {-1, -1}}
+
+var cardinals map[int]i.Point = map[int]i.Point{
+	0: {1, 0}, 1: {0, 1}, 2: {-1, 0}, 3: {0, -1} } // right, down, left, up
