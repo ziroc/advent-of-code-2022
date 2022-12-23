@@ -1,6 +1,10 @@
 package utils
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+	"time"
+)
 
 func Min(a, b int) int {
 	if a <= b {
@@ -59,4 +63,9 @@ func Make3DArray[T any](x, y, z int) [][][]T {
 		}
 	}
 	return arr
+}
+
+func TimeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	fmt.Printf("%s took %s\n", name, elapsed)
 }

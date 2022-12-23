@@ -62,14 +62,13 @@ func apply(masiv []int, target int) {
 	move(masiv, currentPos, fut)
 }
 
-func curPos(masiv []int, target int) (currentPos int) {
+func curPos(masiv []int, target int) int {
 	for i, item := range masiv {
 		if item == target {
-			currentPos = i
-			break
+			return i
 		}
 	}
-	return
+	return 0
 }
 
 func findFuturePos(currentPos, target int) (future int) {
